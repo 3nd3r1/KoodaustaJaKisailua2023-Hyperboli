@@ -1,4 +1,5 @@
 from __future__ import annotations
+import random
 
 from logging import getLogger
 from typing import TYPE_CHECKING
@@ -7,8 +8,11 @@ if TYPE_CHECKING:
     from apiwrapper.websocket_wrapper import ClientContext
 from apiwrapper.models import GameState, Command
 
+from robot import HyperBotti
+
 
 ai_logger = getLogger("team_ai")
+hyperbotti = HyperBotti(ai_logger)
 """You can use this logger to track the behaviour of your bot. 
 
 This is preferred to calling print("msg") as it offers 
@@ -43,6 +47,4 @@ def process_tick(context: ClientContext, game_state: GameState) -> Command | Non
         If your function takes longer than the max tick length the function is cancelled and None is returned.
     """
     ai_logger.info("processing tick")
-
-    # please add your code here
-    return None
+    return hyperbotti.tick(context, game_state)
