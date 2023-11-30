@@ -43,9 +43,9 @@ class HyperBotti:
         return Command(ActionType.Turn, TurnActionData(CompassDirection.West))
 
     def _turn_to_up_or_down(self) -> Command:
-        if self._coords.y == 0 and self._current_direction == CompassDirection.North:
-            self._current_direction = CompassDirection.West
-        if self._coords.y == 29 and self._current_direction == CompassDirection.West:
+        if self._coords.y < 2 and self._current_direction == CompassDirection.North:
+            self._current_direction = CompassDirection.South
+        if self._coords.y > 28 and self._current_direction == CompassDirection.South:
             self._current_direction = CompassDirection.North
 
         return Command(ActionType.Turn, TurnActionData(self._current_direction))
